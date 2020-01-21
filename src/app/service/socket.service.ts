@@ -15,7 +15,7 @@ export class SocketService {
     this.apiUrl = `http://${window.location.hostname }/api`;
     console.log(this.apiUrl);
     this.http.get(this.apiUrl+'/host').subscribe((res:any) => {
-      this.host = res.data.host;
+      this.host = res.host;
       this.connect();
     }, err => {
       this.host = 'http://volumio';
