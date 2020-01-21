@@ -9,7 +9,7 @@ import { HomeComponent } from './routes/home/home.component';
 import {Ng5SliderModule} from "ng5-slider";
 import {HttpClientModule} from "@angular/common/http";
 
-const config: SocketIoConfig = { url: 'http://volumio', options: {autoConnect : false} };
+const config: SocketIoConfig = { url: 'http://127.0.0.1:3000', options: {autoConnect : false} };
 
 @NgModule({
   declarations: [

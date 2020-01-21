@@ -18,7 +18,7 @@ export class SocketService {
       this.host = res.host;
       this.connect();
     }, err => {
-      this.host = 'http://volumio';
+      this.host = 'http://127.0.0.1:3000';
       this.connect();
     });
   }
