@@ -1,7 +1,8 @@
 <ng-container *ngIf="state | async as state; else loading">
 
   <div class="background-wrapper">
-    <div class="background" [style.background-image]="'url('+getAlbumArt(state.albumart)+')'"></div>
+<!--    <div class="background" [style.background-image]="'url('+getAlbumArt(state.albumart)+')'"></div>-->
+    <img class="background" [src]="getAlbumArt(state.albumart)">
   </div>
 
   <div class="content-wrapper">
@@ -9,7 +10,7 @@
       <img [src]="getAlbumArt(state.albumart)" class="albumart">
     </div>
 
-    <div class="content" *ngIf="(state.status !== 'stop' && state.position == 0 && state.duration == 0)">
+    <div class="content">
 
       <div class="volume">
         <i class="fa fa-volume-up mr-2"></i>

@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit{
 
     if (albumart.charAt(0) === '/') {
       //todo use socket hostname here
-      return 'http://volumio' + albumart
+      return 'http://192.168.1.25' + albumart
     }
 
     return albumart;
