@@ -8,7 +8,7 @@ import {SocketIoConfig, SocketIoModule} from "ngx-socket-io";
 import { HomeComponent } from './routes/home/home.component';
 import {Ng5SliderModule} from "ng5-slider";
 
-const config: SocketIoConfig = { url: 'http://volumio', options: {} };
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
   declarations: [
