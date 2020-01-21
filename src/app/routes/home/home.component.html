@@ -9,13 +9,10 @@
       <img [src]="getAlbumArt(state.albumart)" class="albumart">
     </div>
 
-    <div class="content">
+    <div class="content" *ngIf="(state.status !== 'stop' && state.position == 0 && state.duration == 0)">
 
       <div class="volume">
         <i class="fa fa-volume-up mr-2"></i>
-<!--        <div class="volume-meter">-->
-<!--          <div class="volume-bar" [style.width]="state.volume+'%'"></div>-->
-<!--        </div>-->
         <ng5-slider [(value)]="this.volume" (userChange)="setVolumeFromSlider()" [options]="volumeSliderOptions"></ng5-slider>
       </div>
 
@@ -50,6 +47,6 @@
 
 <ng-template #loading>
   <div class="d-flex align-items-center justify-content-center py-5">
-    <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw text-black-50"></i>
+    <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
   </div>
 </ng-template>
