@@ -1,0 +1,119 @@
+.background-wrapper {
+  position: absolute;
+  width: calc(100vw);
+  height: calc(100vh);
+  top: 0;
+  left: 0;
+  z-index: 0;
+  filter: brightness(50%);
+
+  .background {
+    position: absolute;
+    width: calc((100vw + 0px) / 50);
+    height: calc((100vh + 0px) / 50);
+    left: 0;
+    top: 0;
+    background-position: center;
+    background-size: cover;
+    filter: blur(2px);
+    transform-origin: top left;
+    transform: scale(50);
+  }
+
+}
+
+.content-wrapper {
+
+  position: relative;
+  z-index: 1;
+  display: flex;
+  height: 100vh;
+
+  .art {
+    width: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .albumart {
+      height: 90vh;
+      box-shadow: 5px 5px 20px #000;
+    }
+  }
+
+  .content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin: 0 25px 0 0;
+
+    .details {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      span{
+        font-weight: 100;
+        font-size: 1.25rem;
+        line-height: 1;
+        &.artist {
+          //font-weight: 300;
+        }
+        &.title{
+          font-weight: 500;
+          font-size: 1.5rem;
+          margin: 10px 0;
+        }
+      }
+    }
+
+    .controls {
+      opacity: 0.4;
+      position: absolute;
+      width: 100%;
+      bottom: 5%;
+      display: flex;
+      .play-pause {
+        flex-grow: 1;
+        text-align: center;
+      }
+    }
+
+    .volume {
+      opacity: 0.6;
+      position: absolute;
+      width: 100%;
+      top: 5%;
+      display: flex;
+      align-items: center;
+      ng5-slider {
+        margin-top: 3px!important;
+      }
+    }
+  }
+
+
+
+}
+
+::ng-deep {
+  .ng5-slider-bubble, .ng5-slider-pointer {
+    display: none !important;
+  }
+  .ng5-slider {
+    margin: 0!important;
+  }
+
+  .ng5-slider .ng5-slider-bar{
+    height: 1px!important;
+    background-color: #fff!important;
+  }
+
+  .ng5-slider-selection-bar .ng5-slider-bar {
+    height: 5px!important;
+    visibility: visible!important;
+    margin-top: -2px;
+  }
+}

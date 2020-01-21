@@ -1,0 +1,17 @@
+$primary:       #54c688;
+$secondary:     #EB4B0E;
+//$danger:        #e74638;
+//$warning: #c76b00;
+
+$body-bg: #0b0b0b;
+$body-color: #ffffff;
+
+$border-radius:               0;
+$border-radius-lg:            0;
+$border-radius-sm:            0;
+
+$font-family-sans-serif: 'Roboto';
+
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';

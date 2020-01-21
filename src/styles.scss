@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,300i,400,400i,500,700,700i');
+
+@import '../src/scss/bootstrap_base';
+
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/bootstrap-reboot';
+@import '~bootstrap/scss/bootstrap-grid';
+@import '~font-awesome/css/font-awesome.min.css';
+
+@import '../src/scss/overrides';

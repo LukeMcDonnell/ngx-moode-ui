@@ -19,6 +19,11 @@
     "@angular/platform-browser": "~9.0.0-rc.9",
     "@angular/platform-browser-dynamic": "~9.0.0-rc.9",
     "@angular/router": "~9.0.0-rc.9",
+    "@types/rx": "^4.1.1",
+    "bootstrap": "^4.4.1",
+    "font-awesome": "^4.7.0",
+    "ng5-slider": "^1.2.4",
+    "ngx-socket-io": "^3.0.1",
     "rxjs": "~6.5.3",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

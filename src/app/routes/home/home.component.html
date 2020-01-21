@@ -1,0 +1,55 @@
+<ng-container *ngIf="state | async as state; else loading">
+
+  <div class="background-wrapper">
+    <div class="background" [style.background-image]="'url('+getAlbumArt(state.albumart)+')'"></div>
+  </div>
+
+  <div class="content-wrapper">
+    <div class="art">
+      <img [src]="getAlbumArt(state.albumart)" class="albumart">
+    </div>
+
+    <div class="content">
+
+      <div class="volume">
+        <i class="fa fa-volume-up mr-2"></i>
+<!--        <div class="volume-meter">-->
+<!--          <div class="volume-bar" [style.width]="state.volume+'%'"></div>-->
+<!--        </div>-->
+        <ng5-slider [(value)]="this.volume" (userChange)="setVolumeFromSlider()" [options]="volumeSliderOptions"></ng5-slider>
+      </div>
+
+      <div class="details">
+        <span class="artist">{{state.artist}}</span>
+        <span class="title">{{state.title}}</span>
+        <span>{{state.album}}</span>
+      </div>
+
+      <div class="controls">
+        <button class="btn m-1" (click)="emit('prev')">
+          <i class="fa fa-backward fa-fw"></i>
+        </button>
+
+        <div class="play-pause">
+          <button class="btn m-1" (click)="emit('play')" *ngIf="state.status !== 'play'">
+            <i class="fa fa-play fa-3x fa-fw"></i>
+          </button>
+          <button class="btn m-1" (click)="emit('pause')" *ngIf="state.status === 'play'">
+            <i class="fa fa-pause fa-3x fa-fw"></i>
+          </button>
+        </div>
+        <button class="btn m-1" (click)="emit('next')">
+          <i class="fa fa-forward fa-fw"></i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+</ng-container>
+
+<ng-template #loading>
+  <div class="d-flex align-items-center justify-content-center py-5">
+    <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw text-black-50"></i>
+  </div>
+</ng-template>
