@@ -18,17 +18,16 @@ export class SocketService {
       this.host = res.host;
       this.connect();
     }, err => {
-      if (this.apiUrl == 'http://localhost:3000'){
-        this.host = 'http://127.0.0.1:3000';
-      } else {
+      if (this.apiUrl == 'http://localhost:4200'){
         this.host = 'http://volumio';
+      } else {
+        this.host = 'http://127.0.0.1:3000';
       }
       this.connect();
     });
   }
 
   private connect (){
-    console.log(this.host);
     this.socket.ioSocket.io.uri = this.host;
     this.socket.connect()
   }
