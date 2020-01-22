@@ -5,19 +5,19 @@
   top: 0;
   left: 0;
   z-index: 0;
-  filter: brightness(50%);
+  filter: brightness(40%);
 
   .background {
     position: absolute;
-    width: calc((100vw + 0px) / 50);
-    height: calc((100vh + 0px) / 50);
+    width: calc((100vw + 0px) / 20);
+    height: calc((100vh + 0px) / 20);
     left: 0;
     top: 0;
     background-position: center;
     background-size: cover;
     filter: blur(2px);
     transform-origin: top left;
-    transform: scale(50);
+    transform: scale(20);
   }
 
 }
@@ -30,7 +30,7 @@
   height: 100vh;
 
   .art {
-    width: 100vh;
+    flex: 0 0 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,7 +45,7 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    margin: 0 25px 0 0;
+    margin: 2.5% 25px 2.5% 0;
 
     .details {
       display: flex;
@@ -55,7 +55,7 @@
       justify-content: center;
       text-align: center;
       span{
-        font-weight: 100;
+        font-weight: 300;
         font-size: 1.25rem;
         line-height: 1;
         &.artist {
@@ -70,22 +70,41 @@
     }
 
     .controls {
-      opacity: 0.4;
-      position: absolute;
+      align-self: center;
       width: 100%;
+      max-width: 450px;
       bottom: 5%;
       display: flex;
       .play-pause {
         flex-grow: 1;
+        display: flex;
         text-align: center;
+        align-items: center;
+        justify-content: center;
+        button{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 100%;
+          background-color: #54c688;
+          color: #FFF;
+          width: 65px;
+          height: 65px;
+          .fa-play {
+            margin-right: -7px;
+          }
+        }
+      }
+      button {
+        border: none!important;
+        outline: none!important;
       }
     }
 
     .volume {
-      opacity: 0.6;
-      position: absolute;
+      align-self: center;
       width: 100%;
-      top: 5%;
+      max-width: 450px;
       display: flex;
       align-items: center;
       ng5-slider {

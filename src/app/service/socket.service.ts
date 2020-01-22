@@ -18,7 +18,11 @@ export class SocketService {
       this.host = res.host;
       this.connect();
     }, err => {
-      this.host = 'http://127.0.0.1:3000';
+      if (this.apiUrl == 'http://localhost:3000'){
+        this.host = 'http://127.0.0.1:3000';
+      } else {
+        this.host = 'http://volumio';
+      }
       this.connect();
     });
   }

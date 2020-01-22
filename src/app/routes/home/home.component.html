@@ -25,19 +25,19 @@
 
       <div class="controls">
         <button class="btn m-1" (click)="emit('prev')">
-          <i class="fa fa-backward fa-fw"></i>
+          <i class="fa fa-step-backward fa-fw"></i>
         </button>
 
         <div class="play-pause">
           <button class="btn m-1" (click)="emit('play')" *ngIf="state.status !== 'play'">
-            <i class="fa fa-play fa-3x fa-fw"></i>
+            <i class="fa fa-play fa-2x fa-fw"></i>
           </button>
           <button class="btn m-1" (click)="emit('pause')" *ngIf="state.status === 'play'">
-            <i class="fa fa-pause fa-3x fa-fw"></i>
+            <i class="fa fa-pause fa-2x fa-fw"></i>
           </button>
         </div>
         <button class="btn m-1" (click)="emit('next')">
-          <i class="fa fa-forward fa-fw"></i>
+          <i class="fa fa-step-forward fa-fw"></i>
         </button>
       </div>
 
