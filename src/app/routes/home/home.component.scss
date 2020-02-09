@@ -5,7 +5,7 @@
   top: 0;
   left: 0;
   z-index: 0;
-  filter: brightness(40%);
+  filter: brightness(90%);
 
   .background {
     position: absolute;
@@ -15,7 +15,7 @@
     top: 0;
     background-position: center;
     background-size: cover;
-    filter: blur(2px);
+    filter: blur(5px);
     transform-origin: top left;
     transform: scale(20);
   }
@@ -36,6 +36,8 @@
     justify-content: center;
     .albumart {
       height: 90vh;
+      max-height: 450px;
+      max-width: 450px;
       box-shadow: 5px 5px 20px #000;
     }
   }
@@ -54,6 +56,10 @@
       align-items: center;
       justify-content: center;
       text-align: center;
+      //text-shadow: 1px 1px 2px #000;
+      filter: drop-shadow(1px 1px 1px #000);
+
+
       span{
         font-weight: 300;
         font-size: 1.25rem;
@@ -75,6 +81,8 @@
       max-width: 450px;
       bottom: 5%;
       display: flex;
+      filter: drop-shadow(1px 1px 1px #000);
+
       .play-pause {
         flex-grow: 1;
         display: flex;
@@ -107,6 +115,8 @@
       max-width: 450px;
       display: flex;
       align-items: center;
+      filter: drop-shadow(1px 1px 1px #000);
+
       ng5-slider {
         margin-top: 3px!important;
       }

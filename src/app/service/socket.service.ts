@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Socket} from "ngx-socket-io";
 import {HttpClient} from "@angular/common/http";
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +14,16 @@ export class SocketService {
   constructor(public socket: Socket, private http: HttpClient) {
     this.socket.emit('getState');
     this.apiUrl = `http://${window.location.hostname }/api`;
-    console.log(this.apiUrl);
+
     this.http.get(this.apiUrl+'/host').subscribe((res:any) => {
       this.host = res.host;
       this.connect();
     }, err => {
-      if (this.apiUrl == 'http://localhost:4200'){
-        this.host = 'http://volumio';
-      } else {
-        this.host = 'http://127.0.0.1:3000';
+      if (this.apiUrl == 'http://localhost/api'){
+        this.host = 'http://192.168.1.25';
+        if (environment.production) {
+          this.host = 'http://127.0.0.1:3000';
+        }
       }
       this.connect();
     });
