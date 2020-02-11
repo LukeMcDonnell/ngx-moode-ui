@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit, Renderer2} from '@angular/core';
 import {Options} from "ng5-slider";
 import {Observable} from "rxjs";
 import {SocketService} from "../../service/socket.service";
@@ -16,7 +16,7 @@ export class NowPlayingComponent implements OnInit {
   public volume:number = 0;
   public show:boolean = false;
 
-  constructor(public socketService: SocketService) {
+  constructor(public socketService: SocketService, private _renderer: Renderer2,) {
     this.state = this.socketService.getMessages('pushState');
 
     this.volumeSliderOptions = {
@@ -30,17 +30,22 @@ export class NowPlayingComponent implements OnInit {
 
   ngOnInit(): void {
     this.socketService.getMessages('pushState').subscribe((res: any) => {
-      console.log(res);
       this.setVolumeFromState(res.volume);
     });
+
+    if (this.show){
+      this._renderer.addClass(document.body, 'show-now-playing');
+    }
   }
 
   public hideNowPlaying (): void{
     this.show = false;
+    this._renderer.removeClass(document.body, 'show-now-playing');
   }
 
   public showNowPlaying (): void{
     this.show = true;
+    this._renderer.addClass(document.body, 'show-now-playing');
   }
 
   public emit(event: string, data = null): void {

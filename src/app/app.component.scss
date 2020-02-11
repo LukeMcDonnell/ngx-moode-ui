@@ -1,6 +1,15 @@
 @import '~src/scss/bootstrap_base';
 
 .app-wrapper {
+
+  //&.now-playing {
+  //  .main{
+  //    overflow: hidden;
+  //    max-height: 100vh;
+  //
+  //  }
+  //}
+
   display: flex;
   flex-direction: row;
   flex-grow: 1;

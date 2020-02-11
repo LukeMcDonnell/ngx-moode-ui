@@ -15,6 +15,10 @@
 //  scrollbar-width: thin;
 //}
 
+body.show-now-playing {
+  overflow: hidden;
+  padding-right: 7.5px;
+}
 
 body::-webkit-scrollbar {
   width: 7.5px;

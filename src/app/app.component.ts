@@ -9,13 +9,8 @@ import {Observable} from "rxjs";
 })
 export class AppComponent {
   @HostListener('window:scroll', ['$event']) onScrollEvent($event){
-    if ($event.path[1].scrollY > 50) {
-      this.scrolled = true;
-    } else {
-      this.scrolled = false;
-    }
-    // console.log($event.path[1].scrollY);
-    // console.log("scrolling");
+    //TODO: Fix this for firefox & other browsers
+    this.scrolled = $event.path[1].scrollY > 50;
   }
 
   public state: Observable<any>;
@@ -24,7 +19,6 @@ export class AppComponent {
   constructor(public socketService: SocketService) {
     this.state = this.socketService.getMessages('pushState');
   }
-
 
   public getAlbumArt(albumart:string): string {
     if (!albumart) {
