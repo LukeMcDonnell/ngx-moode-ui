@@ -1,3 +1,5 @@
+@import '~src/scss/bootstrap_base';
+
 :host {
   z-index: 10000000000; // should be highest.
   overflow: hidden;
@@ -63,10 +65,8 @@
     top: -3px;
   }
 
-  .art {
-    img{
-      max-height: 80px;
-    }
+  .art img{
+    max-height: 80px;
   }
 
   .details {
@@ -101,6 +101,19 @@
         width: 55px;
         height: 55px;
       }
+    }
+  }
+
+  @media (max-height: 499.99px) {
+    height: 50px;
+    .art {
+      display: none;
+    }
+    .album {
+      display: none;
+    }
+    .title {
+      margin: 3px 0 0!important;
     }
   }
 

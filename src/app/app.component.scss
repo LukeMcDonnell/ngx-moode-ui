@@ -22,14 +22,16 @@
   }
 
   .top-bar {
-    position: sticky;
-    top: 0;
-    overflow: hidden;
-    z-index: 2;
-    transition: background-color linear 100ms;
-    &.scrolled {
-      background-color: $body-bg;
-      border-bottom: #2a2a2a solid 2px;
+    @media (min-height: 500px) {
+      position: sticky;
+      top: 0;
+      overflow: hidden;
+      z-index: 2;
+      transition: background-color linear 100ms;
+      &.scrolled {
+        background-color: $body-bg;
+        border-bottom: #2a2a2a solid 2px;
+      }
     }
   }
 
