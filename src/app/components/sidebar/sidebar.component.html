@@ -1,0 +1,79 @@
+<div class="sidebar" [class.toggle]="toggled" [class.toggle-large]="toggledLarge">
+
+  <button class="btn sm-menu-button" (click)="toggleSidebar();">
+    <i class="fa fa-bars"></i>
+  </button>
+
+  <div class="sidebar-dim" *ngIf="toggled" (click)="closeSidebar();">
+  </div>
+
+  <nav class="sidebar-nav">
+    <ul class="nav" >
+
+      <li class="nav-title mb-4"></li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/" [class.active]="router.url === '/'" (click)="closeSidebar()">
+          <i class="fa fa-fw fa-home"></i>
+          <span class="text">
+            Home
+          </span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/favourites" routerLinkActive="active" (click)="closeSidebar();">
+          <i class="fa fa-fw fa-heart"></i>
+          <span class="text">Favourites</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/playlists" routerLinkActive="active" (click)="closeSidebar();">
+          <i class="fa fa-fw fa-list"></i>
+          <span class="text">Playlists</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/library" routerLinkActive="active" (click)="closeSidebar();">
+          <i class="fa fa-fw fa-music"></i>
+          <span class="text">Library</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/radio" routerLinkActive="active" (click)="closeSidebar();">
+          <i class="fa fa-fw fa-microphone"></i>
+          <span class="text">Radio</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/spotify" routerLinkActive="active" (click)="closeSidebar();">
+          <i class="fa fa-fw fa-spotify"></i>
+          <span class="text">Spotify</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/settings" routerLinkActive="active" (click)="closeSidebar();">
+          <i class="fa fa-fw fa-cogs"></i>
+          <span class="text">Settings</span>
+        </a>
+      </li>
+
+      <li class="nav-item mt-xl-auto menu-toggle">
+        <a class="nav-link d-none d-xl-block" (click)="toggleSidebarLarge();">
+          <i class="fa fa-fw fa-arrow-left"></i>
+        </a>
+
+        <a class="nav-link d-block d-xl-none" (click)="toggleSidebar();">
+          <i class="fa fa-fw fa-arrow-left"></i>
+          <span class="text">Close Menu</span>
+        </a>
+      </li>
+
+    </ul>
+  </nav>
+</div>

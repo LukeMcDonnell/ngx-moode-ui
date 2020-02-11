@@ -1,53 +1,16 @@
-<ng-container *ngIf="state | async as state; else loading">
+<h1 class="mb-5 pb-5">Home</h1>
 
-  <div class="background-wrapper">
-<!--    <div class="background" [style.background-image]="'url('+getAlbumArt(state.albumart)+')'"></div>-->
-    <img class="background" [src]="getAlbumArt(state.albumart)">
-  </div>
+<h5>Recently Played</h5>
+<hr class="mb-5 pb-5">
 
-  <div class="content-wrapper">
-    <div class="art">
-      <img [src]="getAlbumArt(state.albumart)" class="albumart">
-    </div>
+<h5 class="mt-5 pt-5">Favourites</h5>
+<hr class="mb-5 pb-5">
 
-    <div class="content">
+<h5 class="mt-5 pt-5">Playlists</h5>
+<hr class="mb-5 pb-5">
 
-      <div class="volume">
-        <i class="fa fa-volume-up mr-2"></i>
-        <ng5-slider [(value)]="this.volume" (userChange)="setVolumeFromSlider()" [options]="volumeSliderOptions"></ng5-slider>
-      </div>
+<h5 class="mt-5 pt-5">Random</h5>
+<hr class="mb-5 pb-5">
 
-      <div class="details">
-        <span class="artist">{{state.artist}}</span>
-        <span class="title">{{state.title}}</span>
-        <span>{{state.album}}</span>
-      </div>
-
-      <div class="controls">
-        <button class="btn m-1" (click)="emit('prev')">
-          <i class="fa fa-step-backward fa-fw"></i>
-        </button>
-
-        <div class="play-pause">
-          <button class="btn m-1" (click)="emit('play')" *ngIf="state.status !== 'play'">
-            <i class="fa fa-play fa-2x fa-fw"></i>
-          </button>
-          <button class="btn m-1" (click)="emit('pause')" *ngIf="state.status === 'play'">
-            <i class="fa fa-pause fa-2x fa-fw"></i>
-          </button>
-        </div>
-        <button class="btn m-1" (click)="emit('next')">
-          <i class="fa fa-step-forward fa-fw"></i>
-        </button>
-      </div>
-
-    </div>
-  </div>
-
-</ng-container>
-
-<ng-template #loading>
-  <div class="d-flex align-items-center justify-content-center py-5">
-    <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
-  </div>
-</ng-template>
+<h5 class="mt-5 pt-5">Suggestions</h5>
+<hr class="mb-5 pb-5">
