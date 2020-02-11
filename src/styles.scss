@@ -8,3 +8,34 @@
 @import '~font-awesome/css/font-awesome.min.css';
 
 @import '../src/scss/overrides';
+
+
+//body, nav {
+//  scrollbar-color: #7f7f7f white; /* thumb and track color */
+//  scrollbar-width: thin;
+//}
+
+
+body::-webkit-scrollbar {
+  width: 7.5px;
+}
+
+body::-webkit-scrollbar-track {
+  background: white;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #7f7f7f;
+}
+
+nav::-webkit-scrollbar {
+  width: 7.5px;
+}
+
+nav::-webkit-scrollbar-track {
+  background: white;
+}
+
+nav::-webkit-scrollbar-thumb {
+  background: #7f7f7f;
+}
