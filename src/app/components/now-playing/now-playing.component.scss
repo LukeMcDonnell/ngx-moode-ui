@@ -44,14 +44,13 @@
 .small {
   pointer-events: auto;
   z-index: 3;
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 80px;
   bottom: 0;
   left: 0;
   background-color: #171717;
   display: flex;
-  //filter: drop-shadow(1px 1px 10px #000);
 
   transition: transform ease 200ms;
   transform: translateY(80px);
@@ -66,7 +65,7 @@
   }
 
   .art img{
-    max-height: 80px;
+    height: 80px;
   }
 
   .details {
@@ -104,18 +103,30 @@
     }
   }
 
-  @media (max-height: 499.99px) {
-    height: 50px;
+  @mixin small {
+    height: 60px;
     .art {
-      display: none;
+      img{
+        height: 60px;
+      }
+      //display: none;
     }
-    .album {
-      display: none;
-    }
-    .title {
-      margin: 3px 0 0!important;
+    .details{
+      padding: 0 10px;
+      span{
+        font-size: 0.9rem!important;
+      }
+      .album {
+        display: none;
+      }
+      .title {
+        margin: 3px 0 0!important;
+      }
     }
   }
+
+  //@media (max-height: 499.99px) { @include small }
+  @include media-breakpoint-down(sm) { @include small; }
 
 }
 
@@ -162,6 +173,7 @@
       filter: blur(3px);
       transform-origin: top left;
       transform: scale(60);
+      will-change: transform;
     }
   }
 

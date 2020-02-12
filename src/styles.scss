@@ -17,7 +17,7 @@
 
 body.show-now-playing {
   overflow: hidden;
-  padding-right: 7.5px;
+  //padding-right: 7.5px;
 }
 
 body::-webkit-scrollbar {
@@ -43,4 +43,22 @@ nav::-webkit-scrollbar-track {
 
 nav::-webkit-scrollbar-thumb {
   background: #7f7f7f;
+}
+
+.page-title {
+  display: block;
+  position: fixed;
+  top: -50px;
+  transition: top linear 200ms;
+  font-size: 1.3rem;
+
+  @include media-breakpoint-down(sm) { display: none; }
+  @media (max-height: 499.99px) { display: none; }
+
+}
+
+.scrolled .page-title {
+  position: fixed;
+  top: 25px;
+  z-index: 55;
 }
