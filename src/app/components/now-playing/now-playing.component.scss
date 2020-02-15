@@ -199,12 +199,11 @@
 
     .art {
       position: relative;
-      flex: 0 1 100vh;
+      flex: 1 1 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       max-width: calc(100vw - 300px);
-
 
       .albumart {
         object-fit: contain;
@@ -222,6 +221,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      min-width: 50%;
 
       .content-inner {
         height: 90vh;
@@ -239,9 +239,7 @@
         align-items: center;
         justify-content: center;
         text-align: center;
-        //text-shadow: 1px 1px 2px #000;
         filter: drop-shadow(1px 1px 1px #000);
-
 
         span{
           color: #FFF;
@@ -266,6 +264,14 @@
         bottom: 5%;
         display: flex;
         filter: drop-shadow(1px 1px 1px #000);
+        .next{
+          margin-right: 0!important;
+          padding-right: 0!important;
+        }
+        .back{
+          margin-left: 0!important;
+          padding-left: 0!important;
+        }
       }
 
       .volume {

@@ -43,7 +43,6 @@
     <div class="content-wrapper">
 
       <div class="art">
-<!--        <div class="albumart" [style.background-image]="'url('+getAlbumArt(state.albumart)+')'"></div>-->
         <img [src]="getAlbumArt(state.albumart)" class="albumart">
       </div>
 
@@ -62,7 +61,7 @@
           </div>
 
           <div class="controls">
-            <button class="btn m-1" (click)="emit('prev')">
+            <button class="btn m-1 back" (click)="emit('prev')">
               <i class="fa fa-step-backward fa-fw"></i>
             </button>
 
@@ -74,7 +73,7 @@
                 <i class="fa fa-pause fa-2x fa-fw"></i>
               </button>
             </div>
-            <button class="btn m-1" (click)="emit('next')">
+            <button class="btn m-1 next" (click)="emit('next')">
               <i class="fa fa-step-forward fa-fw"></i>
             </button>
           </div>
