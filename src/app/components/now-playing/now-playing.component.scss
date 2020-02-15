@@ -198,23 +198,27 @@
     height: 100vh;
 
     .art {
-      flex: 0 0 100vh;
-      max-width: 60%;
+      position: relative;
+      flex: 0 1 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
+      max-width: calc(100vw - 300px);
+
 
       .albumart {
-        height: 90vh;
+        object-fit: contain;
+        height: 90%;
+        width: 90%;
         max-height: 450px;
         max-width: 450px;
-        box-shadow: 5px 5px 20px #000;
+        filter: drop-shadow(1px 5px 14px #000);
       }
     }
 
     .content {
       position: relative;
-      flex-grow: 1;
+      flex: 1 0 300px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -282,18 +286,14 @@
       flex-direction: column;
 
       .art {
-        flex: 0 0 100vw;
+        flex: 0 3 100vw;
+        position: relative;
         max-width: none;
-        //max-height: 50%;
-        .albumart {
-          height: unset;
-          width: 90vw;
-          max-height: 450px;
-          max-width: 450px;
-          box-shadow: 5px 5px 20px #000;
-        }
+        max-height: calc(100vh - 200px);
       }
       .content {
+        flex: 55 0 200px;
+        min-height: 200px!important;
         .content-inner {
           height: 90%;
           width: 90vw;
