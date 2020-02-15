@@ -9,8 +9,8 @@
     <span class="title">{{state.title}}</span>
     <span class="album">{{state.album}}</span>
   </div>
-  <div class="controls d-none d-sm-flex">
-    <button class="btn m-1" (click)="emit('prev')">
+  <div class="controls">
+    <button class="btn m-1 back" (click)="emit('prev')">
       <i class="fa fa-step-backward fa-fw"></i>
     </button>
 
@@ -23,7 +23,7 @@
       </button>
     </div>
 
-    <button class="btn m-1" (click)="emit('next')">
+    <button class="btn m-1 next" (click)="emit('next')">
       <i class="fa fa-step-forward fa-fw"></i>
     </button>
   </div>
@@ -41,39 +41,42 @@
     </div>
 
     <div class="content-wrapper">
+
       <div class="art">
         <img [src]="getAlbumArt(state.albumart)" class="albumart">
       </div>
 
       <div class="content">
 
-        <div class="volume">
-          <i class="fa fa-volume-up mr-2"></i>
-          <ng5-slider [(value)]="this.volume" (userChange)="setVolumeFromSlider()" [options]="volumeSliderOptions"></ng5-slider>
-        </div>
+        <div class="content-inner">
+          <div class="volume">
+            <i class="fa fa-volume-up mr-2"></i>
+            <ng5-slider [(value)]="this.volume" (userChange)="setVolumeFromSlider()" [options]="volumeSliderOptions"></ng5-slider>
+          </div>
 
-        <div class="details">
-          <span class="artist">{{state.artist}}</span>
-          <span class="title">{{state.title}}</span>
-          <span>{{state.album}}</span>
-        </div>
+          <div class="details">
+            <span class="artist">{{state.artist}}</span>
+            <span class="title">{{state.title}}</span>
+            <span>{{state.album}}</span>
+          </div>
 
-        <div class="controls">
-          <button class="btn m-1" (click)="emit('prev')">
-            <i class="fa fa-step-backward fa-fw"></i>
-          </button>
-
-          <div class="play-pause">
-            <button class="btn m-1" (click)="emit('play')" *ngIf="state.status !== 'play'">
-              <i class="fa fa-play fa-2x fa-fw"></i>
+          <div class="controls">
+            <button class="btn m-1" (click)="emit('prev')">
+              <i class="fa fa-step-backward fa-fw"></i>
             </button>
-            <button class="btn m-1" (click)="emit('pause')" *ngIf="state.status === 'play'">
-              <i class="fa fa-pause fa-2x fa-fw"></i>
+
+            <div class="play-pause">
+              <button class="btn m-1" (click)="emit('play')" *ngIf="state.status !== 'play'">
+                <i class="fa fa-play fa-2x fa-fw"></i>
+              </button>
+              <button class="btn m-1" (click)="emit('pause')" *ngIf="state.status === 'play'">
+                <i class="fa fa-pause fa-2x fa-fw"></i>
+              </button>
+            </div>
+            <button class="btn m-1" (click)="emit('next')">
+              <i class="fa fa-step-forward fa-fw"></i>
             </button>
           </div>
-          <button class="btn m-1" (click)="emit('next')">
-            <i class="fa fa-step-forward fa-fw"></i>
-          </button>
         </div>
 
       </div>

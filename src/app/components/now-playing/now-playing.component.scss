@@ -52,12 +52,13 @@
   background-color: #171717;
   display: flex;
 
-  transition: transform ease 200ms;
+  transition: transform linear 300ms;
+  transition-delay: 20ms;
   transform: translateY(80px);
   will-change: transform;
 
   &.show {
-    transform: translateY(0);
+    transform: translateY(1px);
   }
 
   .progress-bar {
@@ -109,7 +110,24 @@
       img{
         height: 60px;
       }
-      //display: none;
+    }
+    .controls {
+      padding-right: 0;
+      .back {
+        display: none;
+      }
+      .play-pause{
+        button {
+          width: 45px;
+          height: 45px;
+          margin-right: 0!important;
+        }
+      }
+      .next {
+        padding-left: 5px;
+        padding-right: 5px;
+        margin-left: 0!important;
+      }
     }
     .details{
       padding: 0 10px;
@@ -126,7 +144,7 @@
   }
 
   //@media (max-height: 499.99px) { @include small }
-  @include media-breakpoint-down(sm) { @include small; }
+  @include media-breakpoint-down(xs) { @include small; }
 
 }
 
@@ -141,9 +159,11 @@
   width: 100vw;
   height: 100vh;
 
-  transition: transform ease 200ms;
+  transition: transform linear 200ms;
+  transition-delay: 150ms;
   transform: translateY(100vh);
   will-change: transform;
+
   &.show {
     transform: translateY(0);
   }
@@ -151,29 +171,22 @@
   .hide {
     position: absolute;
     z-index: 2;
+    color: #FFF;
+    filter: drop-shadow(2px 2px 2px #000);
   }
 
   .background-wrapper {
     position: absolute;
-    width: calc(100vw);
-    height: calc(100vh);
+    width: 100%;
+    height: 100%;
     top: 0;
     left: 0;
     z-index: 0;
-    filter: brightness(90%);
 
     .background {
-      position: absolute;
-      width: calc((100vw + 0px) / 60);
-      height: calc((100vh + 0px) / 60);
-      left: 0;
-      top: 0;
-      background-position: center;
-      background-size: cover;
-      filter: blur(3px);
-      transform-origin: top left;
-      transform: scale(60);
-      will-change: transform;
+      width: 100%;
+      height: 100%;
+      filter: blur(70px) brightness(60%);
     }
   }
 
@@ -186,9 +199,11 @@
 
     .art {
       flex: 0 0 100vh;
+      max-width: 60%;
       display: flex;
       align-items: center;
       justify-content: center;
+
       .albumart {
         height: 90vh;
         max-height: 450px;
@@ -199,10 +214,19 @@
 
     .content {
       position: relative;
-      display: flex;
-      flex-direction: column;
       flex-grow: 1;
-      margin: 2.5% 25px 2.5% 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .content-inner {
+        height: 90vh;
+        width: 90%;
+        max-height: 450px;
+        max-width: 450px;
+        display: flex;
+        flex-direction: column;
+      }
 
       .details {
         display: flex;
@@ -216,6 +240,7 @@
 
 
         span{
+          color: #FFF;
           font-weight: 300;
           font-size: 1.25rem;
           line-height: 1;
@@ -249,6 +274,29 @@
 
         ng5-slider {
           margin-top: 3px!important;
+        }
+      }
+    }
+
+    @media (orientation: portrait) {
+      flex-direction: column;
+
+      .art {
+        flex: 0 0 100vw;
+        max-width: none;
+        //max-height: 50%;
+        .albumart {
+          height: unset;
+          width: 90vw;
+          max-height: 450px;
+          max-width: 450px;
+          box-shadow: 5px 5px 20px #000;
+        }
+      }
+      .content {
+        .content-inner {
+          height: 90%;
+          width: 90vw;
         }
       }
     }

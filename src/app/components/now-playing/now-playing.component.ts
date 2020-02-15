@@ -14,7 +14,7 @@ export class NowPlayingComponent implements OnInit {
   public volumeSliderOptions: Options;
   public state: Observable<any>;
   public volume:number = 0;
-  public show:boolean = false;
+  public show:boolean = true;
 
   constructor(public socketService: SocketService, private _renderer: Renderer2,) {
     this.state = this.socketService.getMessages('pushState');
