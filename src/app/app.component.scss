@@ -13,8 +13,9 @@
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  overflow: visible;
-  min-height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: calc(100vh - 80px);
   position: relative;
 
   .main {

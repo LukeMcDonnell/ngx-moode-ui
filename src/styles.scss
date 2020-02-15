@@ -15,20 +15,24 @@ html {
   scrollbar-width: thin;
 }
 
-body.show-now-playing {
+//body.show-now-playing {
+//  overflow: hidden;
+//  padding-right: 7px;
+//}
+
+body {
   overflow: hidden;
-  padding-right: 7px;
 }
 
-body::-webkit-scrollbar {
+.app-wrapper::-webkit-scrollbar {
   width: 7px;
 }
 
-body::-webkit-scrollbar-track {
+.app-wrapper::-webkit-scrollbar-track {
   background: white;
 }
 
-body::-webkit-scrollbar-thumb {
+.app-wrapper::-webkit-scrollbar-thumb {
   background: #7f7f7f;
 }
 
