@@ -2,11 +2,7 @@
 
   <app-sidebar></app-sidebar>
 
-  <main class="main">
-
-<!--    <div class="background-wrapper" *ngIf="state | async as state">-->
-<!--      <img class="background" [src]="getAlbumArt(state.albumart)">-->
-<!--    </div>-->
+  <main class="main" (scroll)="onScroll($event)">
 
     <div class="top-bar d-flex mb-3 mb-md-1" [class.scrolled]="scrolled">
       <div class="container-fluid px-2 px-md-4 px-lg-5 py-2 py-md-3 d-flex content-container">
@@ -19,9 +15,9 @@
         <router-outlet></router-outlet>
       </div>
     </div>
+
   </main>
 
 </div>
-
 
 <app-now-playing></app-now-playing>

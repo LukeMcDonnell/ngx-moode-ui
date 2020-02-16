@@ -15,39 +15,24 @@ html {
   scrollbar-width: thin;
 }
 
-//body.show-now-playing {
-//  overflow: hidden;
-//  padding-right: 7px;
-//}
-
 html, body {
   height: 100%;
   overflow: hidden;
 }
 
-.app-wrapper::-webkit-scrollbar {
-  width: 7px;
-}
 
-.app-wrapper::-webkit-scrollbar-track {
-  background: white;
-}
+.main, nav {
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
 
-.app-wrapper::-webkit-scrollbar-thumb {
-  background: #7f7f7f;
-}
+  &::-webkit-scrollbar-track {
+    background: white;
+  }
 
-nav::-webkit-scrollbar {
-  width: 7px;
-  display: none;
-}
-
-nav::-webkit-scrollbar-track {
-  background: white;
-}
-
-nav::-webkit-scrollbar-thumb {
-  background: #7f7f7f;
+  &::-webkit-scrollbar-thumb {
+    background: #7f7f7f;
+  }
 }
 
 .page-title {
@@ -59,7 +44,6 @@ nav::-webkit-scrollbar-thumb {
 
   @include media-breakpoint-down(sm) { display: none; }
   @media (max-height: 499.99px) { display: none; }
-
 }
 
 .scrolled .page-title {

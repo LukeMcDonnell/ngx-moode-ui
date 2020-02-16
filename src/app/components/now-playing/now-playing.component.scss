@@ -143,10 +143,8 @@
       }
     }
   }
-
-  //@media (max-height: 499.99px) { @include small }
+  @media (max-height: 499.99px) { @include small }
   @include media-breakpoint-down(xs) { @include small; }
-
 }
 
 .big {

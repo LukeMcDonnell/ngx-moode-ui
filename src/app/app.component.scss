@@ -2,32 +2,31 @@
 
 .app-wrapper {
 
-  //&.now-playing {
-  //  .main{
-  //    overflow: hidden;
-  //    max-height: 100vh;
-  //
-  //  }
-  //}
-
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  overflow-y: scroll;
-  overflow-x: hidden;
   height: 100%;
   max-height: calc(100% - 80px);
   position: relative;
+  overflow: hidden;
+
+  @include media-breakpoint-down(xs) {
+    max-height: calc(100% - 60px);
+  }
+  @media (max-height: 499.99px) {
+    max-height: calc(100% - 60px);
+  }
 
   .main {
     flex: 1;
     min-width: 0;
     position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
 
     .content-container {
       max-width: 1600px;
       overflow: hidden;
-      min-height: 100%;
       position: relative;
     }
   }
