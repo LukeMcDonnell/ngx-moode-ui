@@ -31,15 +31,20 @@ export class SocketService {
 
   private connect (){
     this.socket.ioSocket.io.uri = this.host;
-    this.socket.connect()
+    this.socket.connect();
   }
 
   public emit(event:string, msg:any = null) {
+    console.log('emitting ' + event);
     this.socket.emit(event, msg);
   }
 
   public getMessages(event:string) {
     return this.socket.fromEvent(event)
   }
+
+  // public on (event:string){
+  //   return this.socket.on(event)
+  // }
 
 }

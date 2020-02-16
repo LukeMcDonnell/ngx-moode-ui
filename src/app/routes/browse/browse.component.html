@@ -1,0 +1,18 @@
+<h1 class="page-title">{{pageTitle}}</h1>
+<h1 class="mb-5">{{pageTitle}}</h1>
+
+<ng-container  *ngIf="browse | async as navigation;">
+  <div *ngFor="let list of navigation.navigation.lists">
+    <h4 *ngIf="list.title">{{list.title}}</h4>
+    <div class="row grid">
+      <div class="col-4 item" *ngFor="let item of list.items">
+        <div class="helper"></div>
+        <div class="content">
+          <i *ngIf="item.icon" [ngClass]="item.icon" class="fa-4x fa-fw"></i>
+          <img *ngIf="item.albumart" [src]="getAlbumArt(item.albumart)">
+          <h5>{{item.title}}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
