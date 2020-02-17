@@ -3,15 +3,19 @@
 
 <ng-container  *ngIf="browse | async as navigation;">
   <div *ngFor="let list of navigation.navigation.lists">
-    <h4 *ngIf="list.title">{{list.title}}</h4>
+    <ng-container *ngIf="list.title">
+      <h6>{{list.title}}</h6>
+      <hr>
+    </ng-container>
     <div class="row grid">
-      <div class="col-4 item" *ngFor="let item of list.items">
-        <div class="helper"></div>
-        <div class="content">
+      <div class="col-4 col-md-3 col-lg-2 item" *ngFor="let item of list.items">
+
+        <div class="image">
           <i *ngIf="item.icon" [ngClass]="item.icon" class="fa-4x fa-fw"></i>
           <img *ngIf="item.albumart" [src]="getAlbumArt(item.albumart)">
-          <h5>{{item.title}}</h5>
         </div>
+
+        <h5 class="text">{{item.title}}</h5>
       </div>
     </div>
   </div>
