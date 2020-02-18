@@ -1,30 +1,40 @@
 <h1 class="page-title">
-  <img class="image" *ngIf="pageImage" [src]="getAlbumArt(pageImage)">
+  <img class="image" *ngIf="pageImage" [src]="pageImage">
   {{pageTitle}}
 </h1>
 
+<div class="background-wrapper" *ngIf="pageImage">
+  <img class="background" [src]="pageImage">
+</div>
+
 <div class="info-container">
-  <img class="image" *ngIf="pageImage" [src]="getAlbumArt(pageImage)">
+  <img class="image" *ngIf="pageImage" [src]="pageImage">
   <h1 class="mb-5">{{pageTitle}}</h1>
 </div>
 
 <div class="browse-container" *ngIf="browse | async as navigation;">
-  <div class="list-container list-style" *ngFor="let list of navigation.navigation.lists">
+
+  <div *ngFor="let list of navigation.navigation.lists" class="list-container"
+       [ngClass]="list.items.length < 50 && list.availableListViews.includes('grid') ? 'grid-style' : 'list-style'">
+
     <ng-container *ngIf="list.title">
       <h6>{{list.title}}</h6>
       <hr>
     </ng-container>
+
     <div class="row grid">
-<!--      <div class="col-4 col-md-3 col-lg-2 item" *ngFor="let item of list.items">-->
-      <div class="col-12 item" *ngFor="let item of list.items" (click)="getUri(item.uri)">
+      <div class="item" *ngFor="let item of list.items" (click)="getUri(item.uri)"
+           [ngClass]="list.items.length < 50 && list.availableListViews.includes('grid') ? 'col-4 col-md-3 col-lg-2' : 'col-12'">
 
         <div class="image">
           <i *ngIf="item.icon" [ngClass]="item.icon" class="fa-5x fa-fw"></i>
-          <img *ngIf="item.albumart" [src]="getAlbumArt(item.albumart)">
+          <img *ngIf="!item.icon" [src]="getAlbumArt(item.albumart)">
         </div>
 
         <h5 class="text">{{item.title}}</h5>
+
       </div>
     </div>
+
   </div>
 </div>

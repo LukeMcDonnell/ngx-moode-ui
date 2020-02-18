@@ -27,8 +27,12 @@ export class BrowseComponent implements OnDestroy {
       this.socketService.getMessages('pushBrowseLibrary').subscribe((data: any) => {
         console.log(data);
         if (data.navigation.info) {
-          this.pageTitle = data.navigation.info.title;
-          this.pageImage = data.navigation.info.albumart;
+          this.pageImage = this.getAlbumArt(data.navigation.info.albumart);
+          if (data.navigation.info.title) {
+            this.pageTitle = data.navigation.info.title;
+          } else {
+            this.pageTitle = data.navigation.info.artist + ' - ' + data.navigation.info.album;
+          }
         }
       })
     );
@@ -40,6 +44,9 @@ export class BrowseComponent implements OnDestroy {
 
   public getAlbumArt(albumart:string): string {
     if (!albumart) {
+      if (this.pageImage) {
+        return this.pageImage;
+      }
       // TODO: return a default image here?
       return null;
     }

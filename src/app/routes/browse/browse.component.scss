@@ -1,14 +1,51 @@
 @import '~src/scss/bootstrap_base';
 
+.background-wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+
+  .background {
+    width: 100%;
+    height: 100%;
+    filter: blur(70px) brightness(25%);
+  }
+  will-change: transform;
+}
 
 .info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
   .image {
-    width: 100%;
+    width: 150px;
     background-color: #4a4a4a;
-    @include media-breakpoint-up(md) {
-      max-width: 200px;
-    }
+    margin: 0 0 25px 0;
   }
+
+  h1 {
+    font-weight: 200;
+  }
+
+  @include media-breakpoint-up(md) {
+    flex-direction: row;
+    align-items: center;
+
+    .image {
+      margin: 0 25px 0 0;
+      width: 200px;
+    }
+
+    h1 {
+      margin: 0!important;
+    }
+    margin-bottom: 60px;
+  }
+
 }
 
 .browse-container {
@@ -92,7 +129,7 @@
       display: flex;
       align-items: center;
 
-      border-bottom: 1px solid #444;
+      border-bottom: 1px solid #393939;
 
       .image {
         height: 40px;
@@ -111,14 +148,14 @@
         img {
           width: 100%;
           height: 100%;
-          object-fit: contain;
+          //object-fit: contain;
         }
 
       }
 
       h5 {
-        font-weight: 400;
-        font-size: 1.1rem;
+        font-weight: 500;
+        font-size: 0.95rem;
         width: 100%;
         padding: 0 20px 0;
         margin: 0;
@@ -139,6 +176,15 @@
       .item {
         padding: 2px 0;
       }
+    }
+  }
+}
+
+.item {
+  cursor: pointer;
+  &:hover{
+    h5 {
+      color: $primary;
     }
   }
 }
