@@ -9,7 +9,7 @@ import {Observable, Subscription} from "rxjs";
   styleUrls: ['./browse.component.scss']
 })
 export class BrowseComponent implements OnDestroy {
-
+  public pageImage = null;
   public pageTitle = "Browse";
   public browse: Observable<any>;
 
@@ -24,10 +24,18 @@ export class BrowseComponent implements OnDestroy {
     this.browse = this.socketService.getMessages('pushBrowseLibrary');
 
     this.$subs.push(
-      this.socketService.getMessages('pushBrowseLibrary').subscribe(data => {
+      this.socketService.getMessages('pushBrowseLibrary').subscribe((data: any) => {
         console.log(data);
+        if (data.navigation.info) {
+          this.pageTitle = data.navigation.info.title;
+          this.pageImage = data.navigation.info.albumart;
+        }
       })
     );
+  }
+
+  public getUri(uri): void {
+    this.socketService.emit('browseLibrary', {uri: uri});
   }
 
   public getAlbumArt(albumart:string): string {

@@ -1,14 +1,22 @@
-<h1 class="page-title">{{pageTitle}}</h1>
-<h1 class="mb-5">{{pageTitle}}</h1>
+<h1 class="page-title">
+  <img class="image" *ngIf="pageImage" [src]="getAlbumArt(pageImage)">
+  {{pageTitle}}
+</h1>
 
-<ng-container  *ngIf="browse | async as navigation;">
-  <div *ngFor="let list of navigation.navigation.lists">
+<div class="info-container">
+  <img class="image" *ngIf="pageImage" [src]="getAlbumArt(pageImage)">
+  <h1 class="mb-5">{{pageTitle}}</h1>
+</div>
+
+<div class="browse-container" *ngIf="browse | async as navigation;">
+  <div class="list-container list-style" *ngFor="let list of navigation.navigation.lists">
     <ng-container *ngIf="list.title">
       <h6>{{list.title}}</h6>
       <hr>
     </ng-container>
     <div class="row grid">
-      <div class="col-4 col-md-3 col-lg-2 item" *ngFor="let item of list.items">
+<!--      <div class="col-4 col-md-3 col-lg-2 item" *ngFor="let item of list.items">-->
+      <div class="col-12 item" *ngFor="let item of list.items" (click)="getUri(item.uri)">
 
         <div class="image">
           <i *ngIf="item.icon" [ngClass]="item.icon" class="fa-5x fa-fw"></i>
@@ -19,4 +27,4 @@
       </div>
     </div>
   </div>
-</ng-container>
+</div>
