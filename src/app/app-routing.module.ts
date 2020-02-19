@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'library', component: BrowseComponent, data: {root: 'artists://', title: 'Library'} },
   { path: 'radio', component: BrowseComponent, data: {root: 'radio', title: 'Web Radio'} },
   { path: 'spotify', component: BrowseComponent, data: {root: 'spotify', title: 'Spotify'} },
+  { path: 'search/:term', component: BrowseComponent, data: {root: 'search', title: 'Search'} },
 ];
 
 @NgModule({

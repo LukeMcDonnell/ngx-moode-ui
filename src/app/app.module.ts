@@ -11,6 +11,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { NowPlayingComponent } from './components/now-playing/now-playing.component';
 import {SidebarComponent} from "./components/sidebar/sidebar.component";
 import { BrowseComponent } from './routes/browse/browse.component';
+import {FormsModule} from "@angular/forms";
 
 const config: SocketIoConfig = { url: 'http://127.0.0.1:3000', options: {autoConnect : false} };
 
@@ -22,13 +23,14 @@ const config: SocketIoConfig = { url: 'http://127.0.0.1:3000', options: {autoCon
     SidebarComponent,
     BrowseComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    SocketIoModule.forRoot(config),
-    Ng5SliderModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        SocketIoModule.forRoot(config),
+        Ng5SliderModule,
+        FormsModule
+    ],
   providers: [SocketService,DelayResolve],
   bootstrap: [AppComponent]
 })

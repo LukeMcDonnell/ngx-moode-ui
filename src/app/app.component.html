@@ -6,7 +6,13 @@
 
     <div class="top-bar d-flex mb-3 mb-md-1" [class.scrolled]="scrolled">
       <div class="container-fluid px-2 px-md-4 px-lg-5 py-2 py-md-3 d-flex content-container">
-        <input type="text" class="ml-auto position-relative">
+        <div class="search-box ml-auto position-relative">
+
+          <i class="fa fa-search fa-fw"></i>
+          <form ngForm (ngSubmit)="getSearch()" class="d-inline-block">
+            <input [(ngModel)]="searchTerm" name="searchTerm" type="text" placeholder="Search">
+          </form>
+        </div>
       </div>
     </div>
 

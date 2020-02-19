@@ -12,14 +12,29 @@ export class BrowseComponent implements OnDestroy {
   public pageImage = null;
   public pageTitle = "Browse";
   public browse: Observable<any>;
+  public searching = false;
 
   private $subs: Subscription[] = [];
 
   constructor(private route:ActivatedRoute, public socketService: SocketService) {
-    this.route.data.subscribe(data => {
-      this.pageTitle = data.title;
-      this.socketService.emit('browseLibrary', {uri: data.root});
-    });
+
+    this.$subs.push(
+      this.route.data.subscribe(data => {
+        this.pageTitle = data.title;
+        if (data.root === 'search') {
+          this.searching = true;
+          this.$subs.push(
+            this.route.paramMap.subscribe((params) => {
+              this.pageTitle = data.title;
+              this.pageImage = null;
+              this.socketService.emit('search', {value: params.get('term')});
+            })
+          );
+        } else {
+          this.socketService.emit('browseLibrary', {uri: data.root});
+        }
+      })
+    );
 
     this.browse = this.socketService.getMessages('pushBrowseLibrary');
 
