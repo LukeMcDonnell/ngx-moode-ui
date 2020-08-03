@@ -1,7 +1,8 @@
 <div class="sidebar" [class.toggle]="toggled" [class.toggle-large]="toggledLarge">
 
   <button class="btn sm-menu-button" (click)="toggleSidebar();">
-    <i class="fa fa-bars"></i>
+    <i class="fa fa-bars" *ngIf="!toggled"></i>
+    <i class="fa fa-close" *ngIf="toggled"></i>
   </button>
 
   <div class="sidebar-dim" *ngIf="toggled" (click)="closeSidebar();">
@@ -65,16 +66,16 @@
 <!--        </a>-->
 <!--      </li>-->
 
-<!--      <li class="nav-item mt-xl-auto menu-toggle">-->
-<!--        <a class="nav-link d-none d-xl-block" (click)="toggleSidebarLarge();">-->
-<!--          <i class="fa fa-fw fa-arrow-left"></i>-->
-<!--        </a>-->
+      <li class="nav-item mt-auto menu-toggle">
+        <a class="nav-link d-none d-xl-block" (click)="toggleSidebarLarge();">
+          <i class="fa fa-fw fa-arrow-left"></i>
+        </a>
 
-<!--        <a class="nav-link d-xl-none" (click)="toggleSidebar();">-->
-<!--          <i class="fa fa-fw fa-arrow-left"></i>-->
-<!--          <span class="text">Close Menu</span>-->
-<!--        </a>-->
-<!--      </li>-->
+        <a class="nav-link d-xl-none" (click)="toggleSidebar();">
+          <i class="fa fa-fw fa-arrow-left"></i>
+          <span class="text">Close Menu</span>
+        </a>
+      </li>
 
     </ul>
   </nav>

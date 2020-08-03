@@ -1,7 +1,6 @@
 import {ChangeDetectionStrategy, Component, OnInit, Renderer2} from '@angular/core';
-import {Options} from "ng5-slider";
-import {Observable} from "rxjs";
-import {SocketService} from "../../service/socket.service";
+import {Options} from 'ng5-slider';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-now-playing',
@@ -13,11 +12,10 @@ export class NowPlayingComponent implements OnInit {
 
   public volumeSliderOptions: Options;
   public state: Observable<any>;
-  public volume:number = 0;
-  public show:boolean = false;
+  public volume = 0;
+  public show = false;
 
-  constructor(public socketService: SocketService, private _renderer: Renderer2,) {
-    this.state = this.socketService.getMessages('pushState');
+  constructor(private _renderer: Renderer2) {
 
     this.volumeSliderOptions = {
       floor: 0,
@@ -29,27 +27,26 @@ export class NowPlayingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.socketService.getMessages('pushState').subscribe((res: any) => {
-      this.setVolumeFromState(res.volume);
-    });
+    // this.socketService.getMessages('pushState').subscribe((res: any) => {
+    //   this.setVolumeFromState(res.volume);
+    // });
 
-    if (this.show){
+    if (this.show) {
       this._renderer.addClass(document.body, 'show-now-playing');
     }
   }
 
-  public hideNowPlaying (): void{
+  public hideNowPlaying(): void {
     this.show = false;
     this._renderer.removeClass(document.body, 'show-now-playing');
   }
 
-  public showNowPlaying (): void{
+  public showNowPlaying(): void {
     this.show = true;
     this._renderer.addClass(document.body, 'show-now-playing');
   }
 
   public emit(event: string, data = null): void {
-    this.socketService.emit(event, data);
   }
 
   public setVolumeFromState(vol: number): void {
@@ -57,20 +54,10 @@ export class NowPlayingComponent implements OnInit {
   }
 
   public setVolumeFromSlider(): void {
-    this.emit('volume', this.volume)
+    this.emit('volume', this.volume);
   }
 
-  public getAlbumArt(albumart:string): string {
-    if (!albumart) {
-      // TODO: return a default image here?
-      return null;
-    }
-
-    if (albumart.charAt(0) === '/') {
-      //todo use socket hostname here
-      return this.socketService.host + albumart
-    }
-
-    return albumart;
+  public getAlbumArt(albumArt: string): string {
+    return albumArt;
   }
 }

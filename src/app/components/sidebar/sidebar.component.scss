@@ -45,7 +45,8 @@
   }
 
   .sidebar-nav{
-    filter: drop-shadow(1px 1px 5px #000);
+    box-shadow: 5px 0 10px rgba(0, 0 ,0, 0.2);
+    //filter: drop-shadow(1px 1px 5px #000);
     color: #292929;
     background: #333333;
     will-change: width, transform;

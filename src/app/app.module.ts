@@ -3,17 +3,15 @@ import { NgModule } from '@angular/core';
 
 import {AppRoutingModule, DelayResolve} from './app-routing.module';
 import { AppComponent } from './app.component';
-import {SocketService} from "./service/socket.service";
-import {SocketIoConfig, SocketIoModule} from "ngx-socket-io";
+import {SocketService} from './service/socket.service';
 import { HomeComponent } from './routes/home/home.component';
-import {Ng5SliderModule} from "ng5-slider";
-import {HttpClientModule} from "@angular/common/http";
+import {Ng5SliderModule} from 'ng5-slider';
+import {HttpClientModule} from '@angular/common/http';
 import { NowPlayingComponent } from './components/now-playing/now-playing.component';
-import {SidebarComponent} from "./components/sidebar/sidebar.component";
+import {SidebarComponent} from './components/sidebar/sidebar.component';
 import { BrowseComponent } from './routes/browse/browse.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule} from '@angular/forms';
 
-const config: SocketIoConfig = { url: 'http://127.0.0.1:3000', options: {autoConnect : false} };
 
 @NgModule({
   declarations: [
@@ -27,11 +25,10 @@ const config: SocketIoConfig = { url: 'http://127.0.0.1:3000', options: {autoCon
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
-        SocketIoModule.forRoot(config),
         Ng5SliderModule,
         FormsModule
     ],
-  providers: [SocketService,DelayResolve],
+  providers: [SocketService, DelayResolve],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

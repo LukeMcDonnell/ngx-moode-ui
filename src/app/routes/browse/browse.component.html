@@ -12,29 +12,7 @@
   <h1 class="mb-5">{{pageTitle}}</h1>
 </div>
 
-<div class="browse-container" *ngIf="browse | async as navigation;">
+<div class="browse-container">
 
-  <div *ngFor="let list of navigation.navigation.lists" class="list-container"
-       [ngClass]="list.items.length < 50 && list.availableListViews.includes('grid') && !searching ? 'grid-style' : 'list-style'">
 
-    <ng-container *ngIf="list.title">
-      <h6>{{list.title}}</h6>
-      <hr>
-    </ng-container>
-
-    <div class="row grid">
-      <div class="item" *ngFor="let item of list.items" (click)="getUri(item.uri)"
-           [ngClass]="list.items.length < 50 && list.availableListViews.includes('grid') && !searching ? 'col-4 col-md-3 col-lg-2' : 'col-12'">
-
-        <div class="image">
-          <i *ngIf="item.icon" [ngClass]="item.icon" class="fa-5x fa-fw"></i>
-          <img *ngIf="!item.icon" [src]="getAlbumArt(item.albumart)">
-        </div>
-
-        <h5 class="text">{{item.title}}</h5>
-
-      </div>
-    </div>
-
-  </div>
 </div>
