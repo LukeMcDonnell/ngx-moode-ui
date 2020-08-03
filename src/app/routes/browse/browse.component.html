@@ -1,7 +1,7 @@
-<h1 class="page-title">
+<div class="page-title">
   <img class="image" *ngIf="pageImage" [src]="pageImage">
-  {{pageTitle}}
-</h1>
+  <h1 class="text">{{pageTitle}}</h1>
+</div>
 
 <div class="background-wrapper" *ngIf="pageImage">
   <img class="background" [src]="pageImage">

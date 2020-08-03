@@ -40,24 +40,42 @@
       transition: background-color linear 100ms;
       &.scrolled {
         background-color: $body-bg;
-        border-bottom: #2a2a2a solid 2px;
       }
     }
 
-    i {
-      color: #7f7f7f;
-      margin-right: 10px;
+    .back-btn {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      height: 100%;
+      font-size: 1.2em;
+      @include media-breakpoint-down(xs) {
+        margin-left: 55px;
+      }
+      @include media-breakpoint-up(lg) {
+        margin-left: -35px;
+      }
     }
 
-    input {
-      background-color: #2b2b2b;
-      color: #fff;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 10px;
-      outline: none;
-    }
+    .search-box {
 
+      .fa-search {
+        color: #7f7f7f;
+        margin-right: 10px;
+        @include media-breakpoint-down(sm) {
+          display: none;
+        }
+      }
+
+      input {
+        background-color: #2b2b2b;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 10px;
+        outline: none;
+      }
+    }
   }
 
 }

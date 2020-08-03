@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -9,17 +10,20 @@ import {Router} from "@angular/router";
 export class AppComponent {
 
   public scrolled = false;
-  public searchTerm = "";
+  public searchTerm = '';
 
-  constructor(public router: Router) {}
+  constructor(private router: Router, private _location: Location) {}
 
-  public onScroll($event): void{
+  public onScroll($event): void {
     this.scrolled = $event.target.scrollTop > 50;
   }
 
   public getSearch(): void {
-    console.log(this.searchTerm);
     this.router.navigate(['search', this.searchTerm]);
+  }
+
+  public back(): void {
+    this._location.back();
   }
 
 }
