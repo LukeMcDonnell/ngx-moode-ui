@@ -9,10 +9,19 @@
 
 <div class="info-container">
   <img class="image" *ngIf="pageImage" [src]="pageImage">
-  <h1 class="mb-5">{{pageTitle}}</h1>
+  <h1 class="mb-2">{{pageTitle}}</h1>
 </div>
 
 <div class="browse-container">
+
+  <div *ngFor="let item of $browse | async | keyvalue; index as i" class="list-item">
+    <div class="middle">
+      <span class="title">{{item.value.artist}}</span> <span class="after-title"> ({{item.value.numberOfAlbums}})</span>
+    </div>
+    <div class="right">
+      <span class="after-title">{{item.value.startYear}} <ng-container *ngIf="item.value.startYear !== item.value.endYear">- {{item.value.endYear}}</ng-container></span>
+    </div>
+  </div>
 
 
 </div>

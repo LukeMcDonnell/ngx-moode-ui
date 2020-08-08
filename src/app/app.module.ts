@@ -11,7 +11,8 @@ import { NowPlayingComponent } from './components/now-playing/now-playing.compon
 import {SidebarComponent} from './components/sidebar/sidebar.component';
 import { BrowseComponent } from './routes/browse/browse.component';
 import {FormsModule} from '@angular/forms';
-
+import { LibraryComponent } from './routes/library/library.component';
+import {NgPipesModule, SlugifyPipe} from 'ngx-pipes';
 
 @NgModule({
   declarations: [
@@ -20,15 +21,17 @@ import {FormsModule} from '@angular/forms';
     NowPlayingComponent,
     SidebarComponent,
     BrowseComponent,
+    LibraryComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        Ng5SliderModule,
-        FormsModule
-    ],
-  providers: [SocketService, DelayResolve],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    Ng5SliderModule,
+    FormsModule,
+    NgPipesModule
+  ],
+  providers: [SocketService, DelayResolve, SlugifyPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

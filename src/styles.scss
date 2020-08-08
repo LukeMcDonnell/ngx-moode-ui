@@ -1,10 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500');
 
 @import '../src/scss/bootstrap_base';
-
 @import '~bootstrap/scss/bootstrap';
-//@import '~bootstrap/scss/bootstrap-reboot';
-//@import '~bootstrap/scss/bootstrap-grid';
+
 @import '~font-awesome/css/font-awesome.min.css';
 
 @import '../src/scss/overrides';
@@ -73,8 +71,11 @@ html, body {
   flex-direction: column;
   align-items: center;
   position: relative;
+  margin-bottom: 20px;
+
   .image {
     width: 150px;
+    height: 150px;
     background-color: #4a4a4a;
     margin: 0 0 25px 0;
   }
@@ -84,6 +85,10 @@ html, body {
     text-align: center;
     font-size: 2em;
   }
+  p{
+    font-weight: 300;
+    text-align: center;
+  }
 
   @include media-breakpoint-up(md) {
     flex-direction: row;
@@ -92,12 +97,17 @@ html, body {
     .image {
       margin: 0 25px 0 0;
       width: 200px;
+      height: 200px;
     }
 
     h1 {
       margin: 0!important;
+      text-align: left;
     }
-    margin-bottom: 60px;
+
+    p {
+      text-align: left;
+    }
   }
 
 }

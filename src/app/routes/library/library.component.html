@@ -1,0 +1,85 @@
+<ng-container *ngIf="$library | async as library">
+
+  <div class="page-background" *ngIf="library.pageImage">
+    <img class="image" [src]="library.pageImage">
+  </div>
+
+  <div class="page-title">
+    <img class="image" *ngIf="library.pageImage" [src]="library.pageImage">
+    <h1 class="text">{{library.pageTitle}}</h1>
+  </div>
+
+  <div class="info-container">
+    <img class="image" *ngIf="library.pageImage" [src]="library.pageImage">
+    <div class="text">
+      <h1 class="mb-2">{{library.pageTitle}}</h1>
+      <p>{{library.pageSubTitle}}</p>
+    </div>
+  </div>
+
+  <div class="library-container">
+
+    <ng-container *ngIf="library.view === 'album'">
+
+      <div class="d-flex my-5 mt-md-0 meta">
+        <div class="btn-group mx-0">
+          <div class="btn btn-primary px-4" (click)="playAlbum(library.list)"><i class="fa fa-play mr-2"></i>Play</div>
+          <div class="btn btn-outline-primary"><i class="fa fa-random mr-2"></i>Shuffle</div>
+          <div class="btn btn-outline-primary" (click)="queueAlbum(library.list)"><i class="fa fa-list mr-2"></i>Queue</div>
+        </div>
+        <div class="text">
+          <p>{{library.list.genre}}, <span> {{library.list.year}}</span></p>
+        </div>
+      </div>
+
+      <div class="list">
+        <a *ngFor="let item of library.list.tracks; index as i" class="list-item" [routerLink]="'/library/'"
+        [class.active]="item.file === socket.stateSnapshot.file">
+          <div class="left">
+            {{i+1}}.
+          </div>
+          <div class="middle">
+            <div class="main">
+              <span class="title">{{item.title}}</span>
+            </div>
+            <div class="right">
+              {{item.time_mmss}}
+            </div>
+          </div>
+        </a>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="library.view === 'artist'">
+      <a *ngFor="let item of library.list.albums | keyvalue" class="list-item" [routerLink]="'/library/' + library.list.slug + '/' + item.key">
+        <div class="left image">
+          <img [src]="item.value.thumbnail">
+        </div>
+        <div class="middle">
+          <div class="main">
+            <span class="title">{{item.value.name}}</span>
+          </div>
+          <div class="right">
+            {{item.value.year}}
+          </div>
+        </div>
+      </a>
+    </ng-container>
+
+    <ng-container *ngIf="library.view === 'library'">
+      <a *ngFor="let item of library.list | keyvalue; index as i" class="list-item" [routerLink]="'/library/' + item.key">
+        <div class="middle">
+          <div class="main">
+            <span class="title">{{item.value.name}}</span>
+            ({{item.value.numberOfAlbums}})
+          </div>
+          <div class="right">
+            {{item.value.startYear}} <ng-container *ngIf="item.value.startYear !== item.value.endYear">- {{item.value.endYear}}</ng-container>
+          </div>
+        </div>
+      </a>
+    </ng-container>
+
+  </div>
+
+</ng-container>

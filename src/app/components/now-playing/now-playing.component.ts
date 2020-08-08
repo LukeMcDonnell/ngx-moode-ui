@@ -1,6 +1,7 @@
-import {ChangeDetectionStrategy, Component, OnInit, Renderer2} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, Renderer2} from '@angular/core';
 import {Options} from 'ng5-slider';
 import {Observable} from 'rxjs';
+import {SocketService, State} from '../../service/socket.service';
 
 @Component({
   selector: 'app-now-playing',
@@ -11,11 +12,18 @@ import {Observable} from 'rxjs';
 export class NowPlayingComponent implements OnInit {
 
   public volumeSliderOptions: Options;
-  public state: Observable<any>;
+  public $state: Observable<State>;
+  public $playlist: Observable<any>;
+  public state?: State;
   public volume = 0;
+  public position = '0';
+  public elapsed: number;
   public show = false;
+  public showPlaylist = false;
 
-  constructor(private _renderer: Renderer2) {
+  private tick = null;
+
+  constructor(private _renderer: Renderer2, public socket: SocketService, private cdRef: ChangeDetectorRef) {
 
     this.volumeSliderOptions = {
       floor: 0,
@@ -24,13 +32,32 @@ export class NowPlayingComponent implements OnInit {
       showTicks: false,
       animate: false
     };
+
+    this.$state = this.socket.$getState();
+    this.$playlist = this.socket.$getCmd('/command/moode.php?cmd=playlist');
+
+    this.$playlist.subscribe(playlist => {
+      console.log(playlist);
+    });
+
+    this.$state.subscribe(state => {
+      this.$playlist = this.socket.$getCmd('/command/moode.php?cmd=playlist');
+      this.volume = Number(state.volume);
+      this.state = state;
+      this.elapsed = Number(state.elapsed);
+      this.calcPosition();
+      if (state.state === 'play') {
+        this.startTick();
+      } else if (this.tick) {
+        this.tick.clearInterval();
+        this.tick = null;
+      }
+      this.cdRef.detectChanges();
+    });
+
   }
 
   ngOnInit(): void {
-    // this.socketService.getMessages('pushState').subscribe((res: any) => {
-    //   this.setVolumeFromState(res.volume);
-    // });
-
     if (this.show) {
       this._renderer.addClass(document.body, 'show-now-playing');
     }
@@ -46,18 +73,39 @@ export class NowPlayingComponent implements OnInit {
     this._renderer.addClass(document.body, 'show-now-playing');
   }
 
-  public emit(event: string, data = null): void {
+  public togglePlaylist(force: boolean = null): void {
+    this.showPlaylist = force !== null ? force : !this.showPlaylist;
   }
 
-  public setVolumeFromState(vol: number): void {
-    this.volume = vol;
+  public emit(api: string, cmd: string, data = null): void {
+    this.socket.$postCmd(api, cmd, data).subscribe();
   }
 
   public setVolumeFromSlider(): void {
-    this.emit('volume', this.volume);
+    console.log(this.socket);
+    this.socket.$postCmd('moode', 'updvolume', {volknob: this.volume}).subscribe();
   }
 
-  public getAlbumArt(albumArt: string): string {
-    return albumArt;
+  public getAlbumArt(url: string): string {
+    return this.socket.host + (url[0] !== '/' ? '/' : '') + url;
   }
+
+  public jumpToTrack(trackId: number) {
+    if (trackId.toString() === this.state.song) { return; }
+    this.socket.$getCmd('/command/index.php?cmd=play ' + trackId).subscribe();
+  }
+
+  private startTick() {
+    if (this.tick) { this.tick.clearInterval(); this.tick = null; }
+    this.tick = setInterval(() => {
+      this.elapsed += 1;
+      this.calcPosition();
+      this.cdRef.detectChanges();
+    }, 1000);
+  }
+
+  private calcPosition() {
+    this.position = ((this.elapsed / Number(this.state.duration)) * 100).toString();
+  }
+
 }

@@ -1,18 +1,13 @@
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
-
-$primary:       #54c688;
+$primary: #439e6c;
 $secondary:     #EB4B0E;
 
-$body-bg: #262626;
+$body-bg: #1c1c1c;
 $body-color: #e4e4e4;
 
-$border-radius:               0;
-$border-radius-lg:            0;
-$border-radius-sm:            0;
+$border-radius:               0.5em;
 
 $font-family-sans-serif: 'Roboto';
 
-$hr-border-color: rgba($white, .1);
-
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';

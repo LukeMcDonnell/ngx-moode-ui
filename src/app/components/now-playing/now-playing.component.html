@@ -1,10 +1,12 @@
-<div class="small" *ngIf="state | async as state;" [class.show]="!show">
-  <ng-container *ngIf="state">
+<div class="small" [class.show]="!show">
+  <ng-container *ngIf="$state | async as state">
 
-    <div class="progress-bar"></div>
+    <div class="progress-bar">
+      <div class="bar" [ngStyle]="{'width.%': position}"></div>
+    </div>
 
     <div class="art" (click)="showNowPlaying()">
-      <img [src]="getAlbumArt(state.albumart)" class="albumart">
+      <img [src]="getAlbumArt(state.coverurl)" class="albumart">
     </div>
     <div class="details" (click)="showNowPlaying()">
       <span class="artist">{{state.artist}}</span>
@@ -12,20 +14,20 @@
       <span class="album">{{state.album}}</span>
     </div>
     <div class="controls">
-      <button class="btn m-1 back" (click)="emit('prev')">
+      <button class="btn m-1 back" (click)="emit('index', 'prev')">
         <i class="fa fa-step-backward fa-fw"></i>
       </button>
 
       <div class="play-pause">
-        <button class="btn m-1" (click)="emit('play')" *ngIf="state.status !== 'play'">
+        <button class="btn m-1" (click)="emit('index', 'play')" *ngIf="state.state!=='play'">
           <i class="fa fa-play fa-2x fa-fw"></i>
         </button>
-        <button class="btn m-1" (click)="emit('pause')" *ngIf="state.status === 'play'">
+        <button class="btn m-1" (click)="emit('index', 'pause')" *ngIf="state.state==='play'">
           <i class="fa fa-pause fa-2x fa-fw"></i>
         </button>
       </div>
 
-      <button class="btn m-1 next" (click)="emit('next')">
+      <button class="btn m-1 next" (click)="emit('index', 'next')">
         <i class="fa fa-step-forward fa-fw"></i>
       </button>
     </div>
@@ -35,57 +37,89 @@
 
 <div class="big" [class.show]="show">
 
-  <div class="btn hide" (click)="hideNowPlaying()"><i class="fa fa-angle-down fa-3x fa-fw"></i></div>
+  <div class="buttons mt-4">
+    <div class="btn" (click)="hideNowPlaying()"><i class="fa fa-arrow-circle-down fa-2x fa-fw"></i></div>
+<!--    <div class="btn" (click)="hideNowPlaying()"><i class="fa fa-info-circle fa-2x fa-fw"></i></div>-->
+    <div class="btn" (click)="togglePlaylist()">
+      <i class="fa fa-list fa-2x fa-fw" *ngIf="!showPlaylist"></i>
+      <i class="fa fa-television fa-2x fa-fw" *ngIf="showPlaylist"></i>
+    </div>
+  </div>
 
-  <ng-container *ngIf="state | async as state; else loading">
+  <ng-container *ngIf="$state | async as state; else loading">
 
     <div class="background-wrapper">
       <!--    <div class="background" [style.background-image]="'url('+getAlbumArt(state.albumart)+')'"></div>-->
-      <img class="background" [src]="getAlbumArt(state.albumart)">
+      <img class="background" [src]="getAlbumArt(state.coverurl)">
     </div>
 
-    <div class="content-wrapper">
+    <ng-container *ngIf="showPlaylist">
 
-      <div class="art">
-        <img [src]="getAlbumArt(state.albumart)" class="albumart">
-      </div>
-
-      <div class="content">
-
-        <div class="content-inner">
-          <div class="volume">
-            <i class="fa fa-volume-up mr-2"></i>
-            <ng5-slider [(value)]="this.volume" (userChange)="setVolumeFromSlider()" [options]="volumeSliderOptions"></ng5-slider>
-          </div>
-
-          <div class="details">
-            <span class="artist">{{state.artist}}</span>
-            <span class="title">{{state.title}}</span>
-            <span>{{state.album}}</span>
-          </div>
-
-          <div class="controls">
-            <button class="btn m-1 back" (click)="emit('prev')">
-              <i class="fa fa-step-backward fa-fw"></i>
-            </button>
-
-            <div class="play-pause">
-              <button class="btn m-1" (click)="emit('play')" *ngIf="state.status !== 'play'">
-                <i class="fa fa-play fa-2x fa-fw"></i>
-              </button>
-              <button class="btn m-1" (click)="emit('pause')" *ngIf="state.status === 'play'">
-                <i class="fa fa-pause fa-2x fa-fw"></i>
-              </button>
+      <div class="content playlist">
+        <div class="container">
+          <div *ngFor="let playlist of $playlist | async; index as i" class="item" [class.active]="i.toString() === state.song" (click)="jumpToTrack(i)">
+            <div class="left">
+              <img [src]="socket.getAlbumArtThumbnail(playlist.file)">
             </div>
-            <button class="btn m-1 next" (click)="emit('next')">
-              <i class="fa fa-step-forward fa-fw"></i>
-            </button>
+            <div class="track">
+              <div>
+                <h5>{{ i+1 }}. {{playlist.Title}}</h5>
+                <p>{{playlist.Artist}} - {{playlist.Album}}</p>
+              </div>
+            </div>
+            <div class="meta">
+              {{playlist.TimeMMSS}}
+            </div>
           </div>
         </div>
-
       </div>
-    </div>
 
+    </ng-container>
+    <ng-container *ngIf="!showPlaylist">
+
+      <div class="content now-playing">
+
+        <div class="art">
+          <img [src]="getAlbumArt(state.coverurl)" class="albumart">
+        </div>
+
+        <div class="content">
+
+          <div class="content-inner">
+            <div class="volume">
+              <i class="fa fa-volume-up mr-2"></i>
+              <ng5-slider [(value)]="this.volume" (userChange)="setVolumeFromSlider()" [options]="volumeSliderOptions"></ng5-slider>
+            </div>
+
+            <div class="details">
+              <span class="artist">{{state.artist}}</span>
+              <span class="title">{{state.title}}</span>
+              <span>{{state.album}}</span>
+            </div>
+
+            <div class="controls">
+              <button class="btn m-1 back" (click)="emit('index', 'prev')">
+                <i class="fa fa-step-backward fa-fw"></i>
+              </button>
+
+              <div class="play-pause">
+                <button class="btn m-1" (click)="emit('index', 'play')" *ngIf="state.state!=='play'">
+                  <i class="fa fa-play fa-2x fa-fw"></i>
+                </button>
+                <button class="btn m-1" (click)="emit('index', 'pause')" *ngIf="state.state==='play'">
+                  <i class="fa fa-pause fa-2x fa-fw"></i>
+                </button>
+              </div>
+              <button class="btn m-1 next" (click)="emit('index', 'next')">
+                <i class="fa fa-step-forward fa-fw"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </ng-container>
   </ng-container>
 
   <ng-template #loading>
@@ -93,4 +127,9 @@
       <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
     </div>
   </ng-template>
+
+</div>
+
+<div class="playlist">
+
 </div>
