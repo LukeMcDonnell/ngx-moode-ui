@@ -21,11 +21,13 @@
 
     <ng-container *ngIf="library.view === 'album'">
 
-      <div class="d-flex my-5 mt-md-0 meta">
-        <div class="btn-group mx-0">
-          <div class="btn btn-primary px-4" (click)="playAlbum(library.list)"><i class="fa fa-play mr-2"></i>Play</div>
-          <div class="btn btn-outline-primary"><i class="fa fa-random mr-2"></i>Shuffle</div>
-          <div class="btn btn-outline-primary" (click)="queueAlbum(library.list)"><i class="fa fa-list mr-2"></i>Queue</div>
+      <div class="d-flex meta">
+        <div class="inputs">
+          <div class="btn-group mx-0">
+            <div class="btn btn-primary pl-3 pr-5" (click)="playAlbum(library.list)"><i class="fa fa-play pr-5"></i>Play Now</div>
+<!--            <div class="btn btn-outline-primary"><i class="fa fa-random mr-2"></i>Shuffle</div>-->
+            <div class="btn btn-outline-primary" (click)="queueAlbum(library.list)"><i class="fa fa-list mr-2"></i>Queue</div>
+          </div>
         </div>
         <div class="text">
           <p>{{library.list.genre}}, <span> {{library.list.year}}</span></p>
@@ -33,7 +35,7 @@
       </div>
 
       <div class="list">
-        <a *ngFor="let item of library.list.tracks; index as i" class="list-item" [routerLink]="'/library/'"
+        <a *ngFor="let item of library.list.tracks; index as i" class="list-item"
         [class.active]="item.file === socket.stateSnapshot.file">
           <div class="left">
             {{i+1}}.
@@ -51,30 +53,65 @@
     </ng-container>
 
     <ng-container *ngIf="library.view === 'artist'">
-      <a *ngFor="let item of library.list.albums | keyvalue" class="list-item" [routerLink]="'/library/' + library.list.slug + '/' + item.key">
+      <div class="d-flex meta">
+        <div class="inputs">
+          <div class="input-group primary">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="album-filter"><i class="fa fa-filter"></i></span>
+            </div>
+            <input type="text" class="form-control" aria-label="Albums Filter" aria-describedby="album-filter" [(ngModel)]="filter">
+            <div class="input-group-append">
+              <button class="btn btn-outline-primary" type="button" (click)="filter=''">Clear</button>
+            </div>
+          </div>
+        </div>
+        <div class="text">
+          <p>{{library.list.numberOfAlbums}} albums, <span> {{library.list.startYear}} - {{library.list.endYear}}</span></p>
+        </div>
+      </div>
+
+      <a *ngFor="let item of library.list.albums | values | filterBy: ['name']: filter | orderBy: ['-year']"
+         class="list-item" [routerLink]="'/library/' + library.list.slug + '/' + item.slug">
         <div class="left image">
-          <img [src]="item.value.thumbnail">
+          <img [src]="item.thumbnail">
         </div>
         <div class="middle">
           <div class="main">
-            <span class="title">{{item.value.name}}</span>
+            <span class="title">{{item.name}}</span>
           </div>
           <div class="right">
-            {{item.value.year}}
+            {{item.year}}
           </div>
         </div>
       </a>
     </ng-container>
 
     <ng-container *ngIf="library.view === 'library'">
-      <a *ngFor="let item of library.list | keyvalue; index as i" class="list-item" [routerLink]="'/library/' + item.key">
+      <div class="d-flex meta">
+        <div class="inputs">
+          <div class="input-group primary">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="library-filter"><i class="fa fa-filter"></i></span>
+            </div>
+            <input type="text" class="form-control" aria-label="Library Filter" aria-describedby="library-filter" [(ngModel)]="filter">
+            <div class="input-group-append">
+              <button class="btn btn-outline-primary" type="button" (click)="filter=''">Clear</button>
+            </div>
+          </div>
+        </div>
+        <div class="text">
+          <p>{{library.numberOfArtists}} artists</p>
+        </div>
+      </div>
+
+      <a *ngFor="let item of (library.list | values | filterBy: ['name']: filter); index as i" class="list-item" [routerLink]="'/library/' + item.slug">
         <div class="middle">
           <div class="main">
-            <span class="title">{{item.value.name}}</span>
-            ({{item.value.numberOfAlbums}})
+            <span class="title">{{item.name}}</span>
+            ({{item.numberOfAlbums}})
           </div>
           <div class="right">
-            {{item.value.startYear}} <ng-container *ngIf="item.value.startYear !== item.value.endYear">- {{item.value.endYear}}</ng-container>
+            {{item.startYear}} <ng-container *ngIf="item.startYear !== item.endYear">- {{item.endYear}}</ng-container>
           </div>
         </div>
       </a>

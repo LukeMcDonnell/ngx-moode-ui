@@ -13,6 +13,7 @@ import {map, publish, refCount, share} from 'rxjs/operators';
 export class LibraryComponent {
 
   public $library: Observable<any>;
+  public filter?: string = null;
 
   constructor(public route: ActivatedRoute, public socket: SocketService) {
 
@@ -40,16 +41,12 @@ export class LibraryComponent {
       return {
         pageTitle: 'Library',
         view: 'library',
+        numberOfArtists: Object.keys(library).length,
         list: library
       };
 
     }));
 
-    // this.socket.$getLibrary().subscribe();
-
-    this.route.params.subscribe(data => {
-      console.log(data);
-    });
 
   }
 

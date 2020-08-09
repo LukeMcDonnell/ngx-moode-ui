@@ -6,7 +6,7 @@
   flex-direction: row;
   flex-grow: 1;
   height: 100%;
-  max-height: calc(100% - 80px);
+  max-height: calc(100% - 85px);
   position: relative;
   overflow: hidden;
 
@@ -25,13 +25,16 @@
     overflow-x: hidden;
 
     .content-container {
-      max-width: 1600px;
+      max-width: 1200px;
       overflow-y: visible;
       position: relative;
     }
   }
 
   .top-bar {
+    z-index: 2;
+    position: relative;
+
     @media (min-height: 500px) {
       position: sticky;
       top: 0;
@@ -61,7 +64,7 @@
     .search-box {
 
       .fa-search {
-        color: #7f7f7f;
+        color: #fff;
         margin-right: 10px;
         @include media-breakpoint-down(sm) {
           display: none;

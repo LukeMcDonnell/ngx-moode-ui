@@ -50,17 +50,11 @@ export class SocketService {
   public host = 'http://moode';
   private $state: Observable<State>;
   private $library: Observable<any>;
-  private $librarySub: Observable<any>;
+  private librarySnapshot: any;
   public stateSnapshot: State;
   private md5: Md5;
 
-  constructor(private http: HttpClient, public slugifyPipe: SlugifyPipe) {
-    // this.$librarySub = this.$getCmd('/command/moode.php?cmd=loadlib').pipe(share());
-    this.$librarySub = this.http.get<any>(this.host + '/command/moode.php?cmd=loadlib').pipe(share());
-    this.$librarySub.subscribe(next => {
-      console.log(next);
-    });
-  }
+  constructor(private http: HttpClient, public slugifyPipe: SlugifyPipe) {}
 
   public getAlbumArt(url: string): string {
     return this.host + (url[0] !== '/' ? '/' : '') + url;
@@ -136,49 +130,53 @@ export class SocketService {
 
     return this.$library = new Observable<any>(subscriber => {
 
-      this.$librarySub.subscribe(response => {
-        const artistLookup = [];
-        const albumLookup = [];
-        const artists = {};
+      if (this.librarySnapshot) {
+        subscriber.next(this.librarySnapshot);
+      } else {
+        this.$getCmd('/command/moode.php?cmd=loadlib').subscribe(response => {
+          const artistLookup = [];
+          const albumLookup = [];
+          const artists = {};
 
-        response.forEach(track => {
-          const a = this.slugify(track.album_artist ? track.album_artist.replace(/^The /, '') : track.artist.replace(/^The / , ''));
-          const al = this.slugify(track.year + ' ' + track.album);
+          response.forEach(track => {
+            const a = this.slugify(track.album_artist ? track.album_artist.replace(/^The /, '') : track.artist.replace(/^The / , ''));
+            const al = this.slugify(track.year + ' ' + track.album);
 
-          if (!artistLookup.includes(a)) {
-            artistLookup.push(a);
-            artists[a] = {
-              name: track.album_artist ? track.album_artist : track.artist,
-              slug: a,
-              numberOfAlbums: 0,
-              startYear: null,
-              endYear: null,
-              albums: {}
-            };
-          }
+            if (!artistLookup.includes(a)) {
+              artistLookup.push(a);
+              artists[a] = {
+                name: track.album_artist ? track.album_artist : track.artist,
+                slug: a,
+                numberOfAlbums: 0,
+                startYear: null,
+                endYear: null,
+                albums: {}
+              };
+            }
 
-          if (!albumLookup.includes(a + '_' + al)) {
-            albumLookup.push(a + '_' + al);
-            artists[a].numberOfAlbums ++;
-            artists[a].startYear = (!artists[a].startYear || track.year < artists[a].startYear) ? track.year : artists[a].startYear;
-            artists[a].endYear = (!artists[a].endYear || track.year > artists[a].endYear) ? track.year : artists[a].endYear;
-            artists[a].albums[al] = {
-              name: track.album,
-              slug: al,
-              coverart: this.getAlbumArtFromFile(track.file),
-              thumbnail: this.getAlbumArtThumbnail(track.file),
-              genre: track.genre.replace(/;/g, ', '),
-              year: track.year,
-              tracks: []
-            };
-          }
+            if (!albumLookup.includes(a + '_' + al)) {
+              albumLookup.push(a + '_' + al);
+              artists[a].numberOfAlbums ++;
+              artists[a].startYear = (!artists[a].startYear || track.year < artists[a].startYear) ? track.year : artists[a].startYear;
+              artists[a].endYear = (!artists[a].endYear || track.year > artists[a].endYear) ? track.year : artists[a].endYear;
+              artists[a].albums[al] = {
+                name: track.album,
+                slug: al,
+                coverart: this.getAlbumArtFromFile(track.file),
+                thumbnail: this.getAlbumArtThumbnail(track.file),
+                genre: track.genre.replace(/;/g, ', '),
+                year: track.year,
+                tracks: []
+              };
+            }
 
-          artists[a].albums[al].tracks.push(track);
+            artists[a].albums[al].tracks.push(track);
 
+          });
+          this.librarySnapshot = artists;
+          subscriber.next(artists);
         });
-        // return artists;
-        subscriber.next(artists);
-      });
+      }
     }).pipe(share());
   }
 

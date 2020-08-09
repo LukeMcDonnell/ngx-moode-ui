@@ -24,9 +24,7 @@
     "font-awesome": "^4.7.0",
     "ng5-slider": "^1.2.4",
     "ngx-pipes": "^2.7.5",
-    "ngx-string-helper": "^2.0.16",
-    "rxjs": "~6.5.3",
-    "slugify": "^1.4.5",
+    "rxjs": "~6.6.2",
     "ts-md5": "^1.2.7",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"

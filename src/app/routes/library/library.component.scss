@@ -2,9 +2,9 @@
 
 .library-container {
   will-change: transform;
-  padding: 3em 100px 3em;
+  padding: 3em 300px 3em;
 
-  margin: 0 -100px;
+  margin: 0 -300px;
 
   background-color: $body-bg;
 
@@ -13,6 +13,39 @@
   }
 
   .meta {
+
+    background-color: $body-bg;
+
+    position: sticky;
+    top: -10px;
+
+    @include media-breakpoint-up(md) {
+      top: 6px;
+    }
+    @include media-breakpoint-up(lg) {
+      top: 66px;
+    }
+
+    margin: 0 -100px 30px;
+    padding: 10px 100px;
+
+    .inputs {
+      .input-group {
+        .input-group-prepend, .input-group-append {
+          .input-group-text {
+            background-color: $primary;
+            color: #FFF;
+            border-color: $primary;
+          }
+        }
+        .form-control {
+          background-color: unset;
+          border-color: $primary;
+          color: #FFF;
+        }
+      }
+    }
+
     .text{
       flex-grow: 1;
       font-weight: 200;
@@ -30,10 +63,25 @@
 
     @include media-breakpoint-down(md) {
       flex-direction: column-reverse;
+
+      .inputs {
+        width: 100%;
+        .input-group, .btn-group {
+          width: 100%;
+        }
+      }
+
       .text {
-        margin-bottom: 20px;
-        justify-content: center;
+        position: relative;
+        height: 50px;
+        margin-bottom: 10px;
+        display: block;
         text-align: center;
+        p {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+        }
       }
     }
   }
@@ -53,7 +101,7 @@
     width: 100%;
     height: 100%;
     filter: blur(100px);
-    opacity: 0.7
+    opacity: 0.8
   }
 
   @include media-breakpoint-down(sm) {
