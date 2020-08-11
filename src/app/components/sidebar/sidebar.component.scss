@@ -31,11 +31,10 @@
   @include media-breakpoint-up(sm){
     flex: 0 0 80px;
     width: 80px;
-  }
-
-  @media (max-height: 499.99px) {
-    flex: 0 0 60px;
-    width: 60px;
+    @media (max-height: 499px) {
+      flex: 0 0 60px;
+      width: 60px;
+    }
   }
 
   @include media-breakpoint-up(lg){
@@ -62,7 +61,7 @@
     z-index: 100;
     padding: 0;
 
-    @media (max-height: 499.99px) {
+    @media (max-height: 499px) {
       height: calc(100% - 60px);
     }
     @include media-breakpoint-down(xs){
@@ -82,7 +81,7 @@
         font-weight: 700;
         text-transform: uppercase;
         @include media-breakpoint-up(sm){
-          @media (max-height: 499.99px) {
+          @media (max-height: 499px) {
             display: none;
           }
         }
@@ -103,7 +102,7 @@
           font-weight: 300;
           transition: background-color 100ms linear;
 
-          @media (max-height: 499.99px) {
+          @media (max-height: 499px) {
             min-height:45px;
             padding: 0.65rem 0.5rem;
             .fa {
@@ -156,12 +155,14 @@
       width: 80px;
     }
 
-    @media (max-height: 499.99px) {
-      flex: 0 0 60px;
-      width: 60px;
-
-      .sidebar-nav {
+    @include media-breakpoint-up(sm) {
+      @media (max-height: 500px) {
+        flex: 0 0 60px;
         width: 60px;
+
+        .sidebar-nav {
+          width: 60px;
+        }
       }
     }
 

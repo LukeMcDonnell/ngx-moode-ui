@@ -34,6 +34,7 @@
   .top-bar {
     z-index: 2;
     position: relative;
+    display:block;
 
     @media (min-height: 500px) {
       position: sticky;
@@ -43,7 +44,6 @@
       transition: background-color linear 100ms;
       &.scrolled {
         background-color: darken($body-bg, 1);
-
       }
     }
 
@@ -56,8 +56,11 @@
       @include media-breakpoint-down(xs) {
         margin-left: 55px;
       }
+      @include media-breakpoint-up(sm) {
+        margin-left: -5px;
+      }
       @include media-breakpoint-up(lg) {
-        margin-left: -35px;
+        margin-left: -55px;
       }
     }
 

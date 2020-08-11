@@ -4,9 +4,9 @@
 
   <main class="main" (scroll)="onScroll($event)">
 
-    <div class="top-bar d-flex mb-3 mb-md-1" [class.scrolled]="scrolled">
+    <div class="top-bar" [class.scrolled]="scrolled">
       <div class="container-fluid px-2 px-md-4 px-lg-5 py-2 py-md-3 d-flex content-container">
-        <a class="back-btn" (click)="back()">
+        <a class="btn back-btn" (click)="back()">
           <i class="fa fa-arrow-left fa-fw"></i>
         </a>
         <div class="search-box ml-auto position-relative">
@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <div class="container-fluid px-2 px-md-4 px-lg-5 pt-2 pt-md-3 content-container" [class.scrolled]="scrolled">
+    <div class="container-fluid px-2 px-md-4 px-lg-5 pt-5 pt-md-3 content-container" [class.scrolled]="scrolled">
       <div class="content-wrapper">
         <router-outlet></router-outlet>
       </div>

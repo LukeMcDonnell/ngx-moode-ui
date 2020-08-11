@@ -26,6 +26,12 @@
       top: 66px;
     }
 
+    @include media-breakpoint-up(md){
+      @media (max-height: 499px) {
+        top: 0;
+      }
+    }
+
     margin: 0 -100px 30px;
     padding: 10px 100px;
 

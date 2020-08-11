@@ -104,7 +104,7 @@
         </div>
       </div>
 
-      <a *ngFor="let item of (library.list | values | filterBy: ['name']: filter); index as i" class="list-item" [routerLink]="'/library/' + item.slug">
+      <a *ngFor="let item of (library.list | values | filterBy: ['name']: filter) | orderBy: ['slug']; index as i" class="list-item" [routerLink]="'/library/' + item.slug">
         <div class="middle">
           <div class="main">
             <span class="title">{{item.name}}</span>

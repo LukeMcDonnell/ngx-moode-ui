@@ -57,7 +57,7 @@ html, body {
   transition: top linear 200ms;
 
   @include media-breakpoint-down(sm) { display: none; }
-  @media (max-height: 499.99px) { display: none; }
+  @media (max-height: 499px) { display: none; }
 }
 
 .scrolled .page-title {
